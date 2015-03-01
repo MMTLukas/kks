@@ -1,2 +1,4 @@
-*
-!*.cpp
+main
+main_clock
+main_clock_gettime
+main_rdtsc
