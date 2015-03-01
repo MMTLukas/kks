@@ -1,0 +1,36 @@
+1. ÜBUNG
+1.1. Aufgabe
+1.1.2	Ausführungszeit messen: Mit Zeitdifferenzberechnung (timestamp am Anfang und am Ende) innerhalb vom Code, in unterschiedlich möglichen Auflösungen (Sekunde vs. ns).
+		Alternativen: Abschätzen anhand Zeitwerte-Tabelle für jeden verwendeten Befehl, Deklaration, etc. oder Ausführungszeit nicht in Sekunden sondern in anderen Maßeinheiten messen (Prozessor-Ticks, …)
+1.1.3	Vergleich Funktionen
+	time()			- Vorteile: Gibt Zeit in Sekunden zurück, wall clock time
+					- Nachteile: Zeit nur in Sekunden, Messung anhand der System Uhr
+
+	clock_gettime()	- Vorteile: Zeit in ns, mehrere Uhren sind möglich
+					- Nachteile: Messung anhand der System Uhr, manuelle Zeitumstellung wirkt, sich auf absolute Timer aus, benötigt ID der Uhr als Parameter, POSIX only
+
+	clock()			- Vorteile: Berechnet Zeit für das bisherige Bearbeiten des Programms durch den Prozessor (processor time), Zeit in ns
+					- Nachteile: Gibt nur eine Abschätzung zurück, misst processor time
+
+	rdtsc			- Vorteile: Hohe Auflösung, wenig Overhead, misst Performance und/oder Zeit
+					- Nachteile: Ungenau bei multiple CPUS aufgrund fehlender Synchronisierung
+
+1.1.4 processor time: Die Zeit in der der Prozessor aktiv an einer Aufgabe arbeitet (z.B. exklusive Wartezeiten). Bei parallel ausgeführten Programmen sinkt die processor time nicht.
+1.1.5 wall clock time: Die reale Zeit für die Dauer zwischen Start und Ende einer Ausführung. Kann durch Multi-Threading verkürzt werden.
+1.1.6 Möglichkeiten Speicherverbrauchsmessung: POSIX getrusage von resource.h oder PID auslesen und im System unter /proc/<pid>/maps nachschauen
+1.1.7 Erkenntnisse sleep(n):
+	- clock_gettime(): Sehr genau, Größe von N wirkt sich auf wall clock time aus, Messung ergibt immer einen Wert größer sleep(n), da Ausführung von Messung scheinbar auch 100µs benötigt.
+	- clock(): Größe von N wirkt sich nicht auf processor time aus
+	- time():  Größe von N wirkt sich auf wall clock time aus
+
+1.3. Aufgabe
+Sortieralgorithmus: Insertionsort
+Implementierung: 	- 32 Terabyte großes File wird Zeile für Zeile eingelesen
+					- Jede Zeile wird an der richtigen Stelle in einem zweiten File im Netzwerkdateisystem einsortiert.
+Durchsatz Netzwerk: - Annahme eines firmeninternen Netzes (z.B. im Techno-Z)
+					- Glasfaser (1 Gbit/s = 125MB/s)
+Durchsatz Festplatten: SSD (6 Gbit/s = 750MB/s)
+Durchsatz Arbeitsspeicher: DDR3-1600, CL7-8-8-24, 1600 * 64 / 8 = 128 MB/s
+Durchsatz CPU: Intel Xeon E3 ~= 20 GB/s
+Speicherverbrauch: 34 Bytes/E-Mail-Adresse, Anzahl an E-Mail-Adressen = 941.176.470.589
+
