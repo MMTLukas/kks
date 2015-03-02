@@ -24,17 +24,32 @@
 	- time():  Größe von N wirkt sich auf wall clock time aus
 
 1.3. Aufgabe
-Sortieralgorithmus: 	External Merge Sort
-Durchsatz Netzwerk:		Annahme eines firmeninternen Netzes (z.B. im Techno-Z), Glasfaser (1 Gbit/s = 125MB/s)
+
+Sortieralgorithmus: 		External Merge Sort
+Durchsatz Netzwerk:			Annahme eines firmeninternen Netzes (z.B. im Techno-Z), Glasfaser (1 Gbit/s = 125MB/s)
 Durchsatz Festplatten: 		SSD, Durchsatz 6 Gbit/s = 750MB/s, RAID 0, 32x1TB = 32TB (exkl. Betriebssystem)
-Durchsatz Arbeitsspeicher: 	DDR3-1600, CL7-8-8-24, 1600 * 64 / 8 = 128 MB/s, 64GB (exkl. Betriebssytem)
-Durchsatz CPU: 				Intel Xeon E5 1607 v2 = > 20 GB/s
-Speicherverbrauch: 		34 Bytes/E-Mail-Adresse, Anzahl an E-Mail-Adressen = 941.176.470.589
+Durchsatz Arbeitsspeicher: 	DDR3 SDRAM 2133, Transferrate 17066MB/s = 17GB/s, Menge = 32GB (exkl. Betriebssytem)
+Durchsatz CPU: 				Intel Xeon E5 2697 v2 = 119 GB/s
+Speicherverbrauch: 			Durchschnittliche Länge einer E-Mail-Adresse: 19 Zeichen, Format ASCII (7-Bit pro Zeichen) = 19*7bit = 133 bit = 16,625 Byte, Anzahl an E-Mail-Adressen = 1.924.812.030.075,188 ~= 2 Billionen
+
 Umsetzung:				- Kopieren der Datei über das Netzwerk auf den eigenen Rechner
-							- 
 						- 32TB aufsplitten zu 1000 Files mit 32GB, welche einzeln mit Merge-Sort (Lautzeit n*log(n) im worst-case) sortiert werden
 						- Von den 1000 Files werden 1000 Chunks in der Größe von 32MB eingelesen und mit Merge-Sort in einen 32GB großen Buffer geschrieben. 
 						- Danach wird der 32GB große Buffer in die finale Datei geschrieben. Finale Größe der Datei ist 32TB.
+
+Benötigte Zeit: 		- Kopiervorgang: 32TB / 125MB/s = 256000s = 71.11h
+						- Sortiervorgang: 
+							- Laufzeit vom Einlesen/Schreiben 1000x 1 File zu je 32 GB ~= 1000 * 43 Sekunden = 43000 Sekunden ~= 11.95 h
+								- Pro File benötigte Zeit 269ms (CPU) / 1882ms (RAM) / 42666ms (SSD)
+							- Laufzeit vom Sortieren 1000x 1 File zu je 32 GB:
+								- 1 File: O(n*log(n)) mit n 1924812030 und pro Sortierschritt 836ns = 166,4549 Minuten 
+								- Einlesen und Schreiben vom 2 * 716,66 Minuten ~= 23,88 h
+							- Laufzeit vom Mergen der 1000 Files 
+								- Insgesamt 32 TB einlesen ~= 11.95 h
+								- Mergen (Vergleichen von 1000 Einträgen und Schreiben des niedrigsten in Buffer) Annahme = 1 Mikro-Sekunde => 534,67h = 22,3 Tage
+								- Schreiben von 32 TB ~= 11.95 h
+
+
 
 
 
