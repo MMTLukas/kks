@@ -6,7 +6,7 @@
 	time()			- Vorteile: Gibt Zeit in Sekunden zurück, wall clock time
 				- Nachteile: Zeit nur in Sekunden, Messung anhand der System Uhr
 
-	clock_gettime()	- Vorteile: Zeit in ns, mehrere Uhren sind möglich
+	clock_gettime()		- Vorteile: Zeit in ns, mehrere Uhren sind möglich
 				- Nachteile: Messung anhand der System Uhr, manuelle Zeitumstellung wirkt, sich auf absolute Timer aus, benötigt ID der Uhr als Parameter, POSIX only
 
 	clock()			- Vorteile: Berechnet Zeit für das bisherige Bearbeiten des Programms durch den Prozessor (processor time), Zeit in ns
@@ -24,13 +24,17 @@
 	- time():  Größe von N wirkt sich auf wall clock time aus
 
 1.3. Aufgabe
-Sortieralgorithmus: 		Insertionsort
-Implementierung: 		- 32 Terabyte großes File wird Zeile für Zeile eingelesen
-		 		- Jede Zeile wird an der richtigen Stelle in einem zweiten File im Netzwerkdateisystem einsortiert.
-Durchsatz Netzwerk:		- Annahme eines firmeninternen Netzes (z.B. im Techno-Z)
-				- Glasfaser (1 Gbit/s = 125MB/s)
-Durchsatz Festplatten: 		SSD (6 Gbit/s = 750MB/s)
-Durchsatz Arbeitsspeicher: 	DDR3-1600, CL7-8-8-24, 1600 * 64 / 8 = 128 MB/s
-Durchsatz CPU: 			Intel Xeon E3 ~= 20 GB/s
+Sortieralgorithmus: 	External Merge Sort
+Durchsatz Netzwerk:		Annahme eines firmeninternen Netzes (z.B. im Techno-Z), Glasfaser (1 Gbit/s = 125MB/s)
+Durchsatz Festplatten: 		SSD, Durchsatz 6 Gbit/s = 750MB/s, RAID 0, 32x1TB = 32TB (exkl. Betriebssystem)
+Durchsatz Arbeitsspeicher: 	DDR3-1600, CL7-8-8-24, 1600 * 64 / 8 = 128 MB/s, 64GB (exkl. Betriebssytem)
+Durchsatz CPU: 				Intel Xeon E5 1607 v2 = > 20 GB/s
 Speicherverbrauch: 		34 Bytes/E-Mail-Adresse, Anzahl an E-Mail-Adressen = 941.176.470.589
+Umsetzung:				- Kopieren der Datei über das Netzwerk auf den eigenen Rechner
+							- 
+						- 32TB aufsplitten zu 1000 Files mit 32GB, welche einzeln mit Merge-Sort (Lautzeit n*log(n) im worst-case) sortiert werden
+						- Von den 1000 Files werden 1000 Chunks in der Größe von 32MB eingelesen und mit Merge-Sort in einen 32GB großen Buffer geschrieben. 
+						- Danach wird der 32GB große Buffer in die finale Datei geschrieben. Finale Größe der Datei ist 32TB.
+
+
 
