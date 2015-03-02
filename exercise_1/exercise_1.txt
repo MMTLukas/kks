@@ -37,17 +37,19 @@ Umsetzung:				- Kopieren der Datei über das Netzwerk auf den eigenen Rechner
 						- Von den 1000 Files werden 1000 Chunks in der Größe von 32MB eingelesen und mit Merge-Sort in einen 32GB großen Buffer geschrieben. 
 						- Danach wird der 32GB große Buffer in die finale Datei geschrieben. Finale Größe der Datei ist 32TB.
 
-Benötigte Zeit: 		- Kopiervorgang: 32TB / 125MB/s = 256000s = 71.11h
-						- Sortiervorgang: 
-							- Laufzeit vom Einlesen/Schreiben 1000x 1 File zu je 32 GB ~= 1000 * 43 Sekunden = 43000 Sekunden ~= 11.95 h
-								- Pro File benötigte Zeit 269ms (CPU) / 1882ms (RAM) / 42666ms (SSD)
-							- Laufzeit vom Sortieren 1000x 1 File zu je 32 GB:
-								- 1 File: O(n*log(n)) mit n 1924812030 und pro Sortierschritt 836ns = 166,4549 Minuten 
-								- Einlesen und Schreiben vom 2 * 716,66 Minuten ~= 23,88 h
-							- Laufzeit vom Mergen der 1000 Files 
-								- Insgesamt 32 TB einlesen ~= 11.95 h
-								- Mergen (Vergleichen von 1000 Einträgen und Schreiben des niedrigsten in Buffer) Annahme = 1 Mikro-Sekunde => 534,67h = 22,3 Tage
-								- Schreiben von 32 TB ~= 11.95 h
+Benötigte Zeit: 
+
+	- Kopiervorgang (Stream) inkl. Speichern auf lokalem System: 32TB / 125MB/s = 256000s = 71.11h
+	- Sortiervorgang:
+		- Laufzeit vom Einlesen 1000x 1 File zu je 32 GB ~= 1000 * 43 Sekunden = 43000 Sekunden ~= 11.95 h
+			- Pro File benötigte Zeit 269ms (CPU) / 1882ms (RAM) / 42666ms (SSD)
+		- Laufzeit vom Sortieren 1000x 1 File zu je 32 GB:
+			- 1 File: O(n*log(n)) mit n 1924812030 und pro Sortierschritt ca. 836ns = 14,940 Sekunden = 4,15 h
+		- Schreiben und Einlesen von 32TB: 2*716,66 Minuten ~= 23,88 h
+		- Laufzeit vom Mergen der 1000 Files:
+			- Mergen (Vergleichen von 1000 Einträgen und Verschieben des niedrigsten Eintrages in Buffer) Annahme = 1 Mikro-Sekunde => 26,82 Minuten
+			- Schreiben von 32 TB ~= 11.95 h
+		- Gesamt: 71,11+11,95+4,15+23,88+0,447+11,95 = 133,487h = 133,5 h = 5,56 Tage = 5 1/2 Tage
 
 
 
