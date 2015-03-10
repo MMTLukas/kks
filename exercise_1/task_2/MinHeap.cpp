@@ -4,11 +4,11 @@
 MinHeap::MinHeap(unsigned newSize){
     elements = 0;
     size = newSize;
-    values = (double*) calloc (size,sizeof(double));
+    values = new double[size];
 }
 
 MinHeap::~MinHeap(){
-    free(values);
+    delete[] values;
 }
 
 double MinHeap::top() {

@@ -24,13 +24,15 @@ unsigned measureSTLImplementation(unsigned n){
     timespec timeStart, timeEnd;
     clock_gettime(CLOCK_REALTIME, &timeStart);
     
-    double *heapData = new double(n);
+    double *heapData = new double[n];
     for(unsigned i = 0; i < n; i++) {
         heapData[i] = rand() % n;
     }
     std::make_heap(heapData, heapData + n, comp);
 
     clock_gettime(CLOCK_REALTIME, &timeEnd);
+
+    delete[] heapData;
     return timeEnd.tv_nsec - timeStart.tv_nsec;
 }
 
