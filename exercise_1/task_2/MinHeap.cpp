@@ -4,11 +4,11 @@
 MinHeap::MinHeap(unsigned newSize){
     elements = 0;
     size = newSize;
-    values = (double*) calloc (size,sizeof(double));
+    values = new double[size];
 }
 
 MinHeap::~MinHeap(){
-    free(values);
+    delete[] values;
 }
 
 double MinHeap::top() {
@@ -20,7 +20,7 @@ void MinHeap::push(double value){
     unsigned index = elements;
     values[index] = value;
     elements++;
-       
+
     //find parent to check if heap characteristic is satiesfied
     unsigned parentIdx = parentIndex(index);
     // upheap till the heap characteristic is satisfied
@@ -37,25 +37,25 @@ double MinHeap::pop(){
     unsigned oldRoot = values[0];
     cout << "pop: " << values[index] << endl;
     values[index] = values[--elements];
-    
+
     unsigned leftChild = leftChildIndex(index);
     unsigned rightChild = rightChildIndex(index);
-    
+
     unsigned minChildIndex = 0;
-    
+
     do {
         minChildIndex = getMinChildIndex(index);
 
         if(values[index] > values[minChildIndex]) {
             std::swap(values[index], values[minChildIndex]);
-    
+
             index = minChildIndex;
             leftChild = leftChildIndex(index);
             rightChild = rightChildIndex(index);
             minChildIndex = getMinChildIndex(index);
         }
     } while(values[index] > values[minChildIndex] && (rightChild < elements || leftChild < elements));
-    
+
     return oldRoot;
 }
 
@@ -66,22 +66,22 @@ void MinHeap::print() {
 }
 
 unsigned MinHeap::leftChildIndex(unsigned index) {
-    return 2 * index + 1;
+    return 2 * index;
 }
 
 unsigned MinHeap::rightChildIndex(unsigned index) {
-    return 2 * index + 2;
+    return 2 * index + 1;
 }
 
 unsigned MinHeap::parentIndex(unsigned index) {
-    return (index - 1) / 2;
+    return index / 2;
 }
 
 unsigned MinHeap::getMinChildIndex(unsigned index) {
     unsigned leftChild = leftChildIndex(index);
     unsigned rightChild = rightChildIndex(index);
     unsigned minChildIndex = 0;
-    
+
     (values[leftChild] < values[rightChild]) ? minChildIndex = leftChild : minChildIndex = rightChild;
 
     return minChildIndex;
