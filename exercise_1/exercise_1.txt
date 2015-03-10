@@ -44,10 +44,10 @@ Benötigte Zeit:
 		- Laufzeit vom Einlesen 1000x 1 File zu je 32 GB ~= 1000 * 43 Sekunden = 43000 Sekunden ~= 11.95 h
 			- Pro File benötigte Zeit 269ms (CPU) / 1882ms (RAM) / 42666ms (SSD)
 		- Laufzeit vom Sortieren 1000x 1 File zu je 32 GB:
-			- 1 File: O(n*log(n)) mit n 1924812030 und pro Sortierschritt ca. 836ns = 14,940 Sekunden = 4,15 h
+			- 1 File: O(n*log(n)) mit n 1924812030 und pro Sortierschritt ca. 836ns (Annahme) = 14,940 Sekunden = 4,15 h
 		- Schreiben und Einlesen von 32TB: 2*716,66 Minuten ~= 23,88 h
 		- Laufzeit vom Mergen der 1000 Files:
-			- Mergen (Vergleichen von 1000 Einträgen und Verschieben des niedrigsten Eintrages in Buffer) Annahme = 1 Mikro-Sekunde => 26,82 Minuten
+			- Mergen (Vergleichen von 1000 Einträgen und Verschieben des niedrigsten Eintrages in Buffer) 1 Mikro-Sekunde (Annahme) pro Sortierschritt => 26,82 Minuten
 			- Schreiben von 32 TB ~= 11.95 h
 		- Gesamt: 71,11+11,95+4,15+23,88+0,447+11,95 = 133,487h = 133,5 h = 5,56 Tage = 5 1/2 Tage
 
