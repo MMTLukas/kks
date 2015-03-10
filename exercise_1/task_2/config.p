@@ -1,11 +1,11 @@
 set terminal png enhanced
 
 set xlabel "Number of elements (logscale)"
-set ylabel "Nanoseconds per push operation" 
+set ylabel "Nanoseconds per push operation (logscale)" 
 
-set yrange[0:]
 set logscale x
+set logscale y
 
 plot \
-"data/results_own.dat" using 2:3 with errorlines title "My Min-Heap Implementation", \
-"data/results_stl.dat" using 2:3 with errorlines title "STL Implementation"
+"data/results.dat" using 2:4 with errorlines title "Own minheap implementation", \
+"data/results.dat" using 2:6 with errorlines title "STL implementation"

@@ -1,0 +1,41 @@
+2. ÜBUNG
+2.1. Aufgabe
+- Heap: Contiguous memory
+- Doubly Linked List: Pointers
+- Bitmap: Contiguous memory
+- Hashmap: Both (hybrid)
+  - Linear-Probing: Contiguous memory
+  - Seperate-Chaining: 
+    - Both (hybrid): Array with pointers
+
+- Contiguous memory:
+  - Vorteile: Bei bekanntem Index Zugriffszeit O(1), wenig Overhead (weil nur Wert gespeichert wird), Caching leichter (da zusammenhängend)
+  - Nachteile: Entfernen und Einfügen ist mit O(n) teuer, feste Größe, bei nicht unbekanntem Index ist die Zugriffszeit hoch (Worst-Case O(n))
+
+- Pointers:
+  - Vorteile: Einfügen in O(1) (z.B. Double-Linked List), beliebige Größe (leicht und günstig zu Erweitern)
+  - Nachteile: Zugriffszeit ist teuer (Worst-Case O(n)), Caching schwieriger (da nicht zusammenhängend)
+
+2.2. Aufgabe
+
+...
+
+2.3. Aufgabe
+- performance.now() und performance.timing() - ist mir neu
+- forEach ist zwar sauberer, aber nicht schneller als for-Schleife, da jedes mal die Funktion aufgerufen wirden
+- Console-API war bis jetzt nur spartial bekannt (log, error, info)
+  - console.timestamp, console.timeEnd fügt Eintrag zur Timeline hinzu
+- Remote Debugging API / Timeline API nur spartial bekannt
+- Telemetry Testing Framework von Google noch unbekannt
+  - Erhält JSON als Eingabe
+  - FPS Meter nur einmal bereits verwendet
+  - Topcoat Telemetry unbekannt
+  - chrome://tracing zeigt Performance vom Tab - nie verwendet
+    - Tiefere Ansicht der Ausführungen sind auch mit dabei - Diskutieren!
+- Kamera Latency-Messung ist mir neu, aber ist amüsant
+- Memory Profiling
+  - Timeline -> Memory -> Übersicht über RAM - ist mir neu
+  - Profile -> CPU Profiles -> Flame Chart - ist mir neu
+- console.profile erstellt neues Profile - ist mir neu
+- V8 (V9) Self-Build - wär toll zum Ausprobieren
+- Asynch Scroll API - ist mir neu
