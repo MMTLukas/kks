@@ -17,8 +17,9 @@
   - Nachteile: Zugriffszeit ist teuer (Worst-Case O(n)), Caching schwieriger (da nicht zusammenhängend)
 
 2.2. Aufgabe
-
-...
+- Experiment "3.3.2. Measurements of cache effects" wurde ausgewählt. 
+- (Unterschied der) Ergebnisse: Je größer NPAD, desto höher fängt die Kurve an und liegt, jedoch für die niedrigen Werte liegen die Kurven nicht nahe beiander. z.B. bei 2^14 sollten die Werte alle noch ungefähr auf dem gleichen Wert von der Y-Achse liegen (siehe 3.11. im Paper), jedoch starten diese alle auf einem unterschiedlichen Wert. Eindeutig ersichtlich sind jedoch die Plateaus, welche die einzelnen Caches (L2, L3) darstellen.
+- Grund der Unterschiede: Unterschiedliche Cache-Konfigurationen und Eigenschaften der CPU und des Arbeitsspeichers. 
 
 2.3. Aufgabe
 - performance.now() und performance.timing() - ist mir neu
