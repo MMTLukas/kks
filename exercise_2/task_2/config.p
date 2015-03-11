@@ -4,7 +4,6 @@ set xlabel "Working Set Size (Bytes)"
 set ylabel "Cycles/Operation" 
 
 set logscale x 2
-set logscale y
 
 set format x '2^{%L}'
 
