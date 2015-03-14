@@ -54,7 +54,7 @@ int main() {
             current = next;
         }
         
-        unsigned yValue = (ticksEnd - ticksStart) / (i/sizeof(l));
+        unsigned yValue = (ticksEnd - ticksStart) / i;
         unsigned xValue = exp;
 
         fprintf(pFile, "%d\t%d\n", xValue, yValue);

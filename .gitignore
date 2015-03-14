@@ -2,3 +2,7 @@ main
 main_clock
 main_clock_gettime
 main_rdtsc
+v8
+v8/
+.gclient
+.gclient_entries
